@@ -1,5 +1,10 @@
 package org.example;
-
+public Class Alfabeto (char c) {
+    
+    bollean isAlfabeto return True{
+        return  c >= 'a' && c <= 'z';
+    }
+}
 public class G_Pilha <T> {
     private static final int Tam_Default = 100;
     private int topoPilha;
