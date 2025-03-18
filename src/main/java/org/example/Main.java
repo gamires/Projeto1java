@@ -1,53 +1,58 @@
+package org.example;
+
 import java.util.Scanner;
 
 public class Main {
+    public static boolean isAlfabeto(char c) {
+        return c >= 'a' && c <= 'z';
+    }
     public static void main(String[] args) {
+        
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Character> letrasList = new ArrayList<>();
-        ArrayList<Integer> numerosList = new ArrayList<>();
-
+        //colocar []
+        char[] letrasList = new char[10];
+        int[] numerosList = new int[10];
+        int Q_elementos = 0;
+    
+    
         System.out.println("Digite seu prompt: ");
-
-        while (true) {
+        String entrada = scanner.nextLine();
+    
+        while (entrada != "exit") {
             try {
                 // Ele vai digitar o pronpt ex: Y = 3 ou y = 3
-                String entrada = scanner.nextLine().replaceAll(" ", "").toLowerCase(); 
+                entrada = scanner.nextLine().replaceAll(" ", "").toLowerCase(); 
                 // aqui ele armazena na entrada a string digitada e remove as partes em branco agr esta assim y=3
-
-
-                if(letra(charAt(0))) { 
-                    
-                // analisa se o primeiro elemento da string e se for uma letra entao addiciona ao array de letras
-
-                
-                    if (entrada.indexOf('=')) { 
-                    
-
-                        if (igualIndex != -1 && igualIndex < entrada.length() - 1) {
-                            String numeroStr = entrada.substring(igualIndex + 1);
-
-                            try {
-                                int numero = Integer.parseInt(numeroStr);
-                                letrasList.add(primeiroChar);
-                                numerosList.add(numero);
-                                System.out.println("Letra e número adicionados: " + primeiroChar + " = " + numero);
-                            }   
-                            catch (NumberFormatException e) {
-                                System.out.println("Valor após '=' não é um número válido.");
+    
+    
+                if(isAlfabeto(entrada.charAt(0))) { // analisa se o primeiro elemento da string e se for uma letra entao addiciona ao array de letras
+                    if ((entrada.charAt(1) == '=')) { // analisa se o segundo elemento da string e se for um igual
+                        for(int i = 2; i < entrada.length();i++){
+                            char c = entrada.charAt(i);
+                            if (!isAlfabeto(c)) { // Verifica se é número
+                                int num = c - '0';// Converte o char para int
+                                numerosList[Q_elementos] = num;
+                                letrasList[Q_elementos] = entrada.charAt(0);
+                                Q_elementos++;
+                                break;
                             }
                         } 
                     } 
-                } 
-
-            }
-             
-            }
-            scanner.close();
+                }
+                // analisa se o primeiro elemento da string e se for uma letra entao addiciona ao array de letras
+                    
+            
+            
+    
+            System.out.println("Letras adicionadas: " + letrasList);
+            System.out.println("Números adicionados: " + numerosList);
+            // comtinua no VARS faltou so fazer a parte de printar o resultado pq esta em char e n sei como transformar de char p
+    
         }
-
-        System.out.println("Letras adicionadas: " + letrasList);
-        System.out.println("Números adicionados: " + numerosList);
-
-        scanner.close();
-    }
+            catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            }
+  }    
+  scanner.close();
+ }
 }
